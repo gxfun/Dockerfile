@@ -1,0 +1,241 @@
+# the details of cluster-configuration 
+
+clusterID: your_cluster_id
+
+clusterinfo:
+ 
+  cluster-dns: 168.63.129.16
+  
+  api-servers-ip: 192.168.6.23
+  #api-server-port: 8080  
+  service-cluster-ip-range: 10.254.0.0/16
+  storage-backend: etcd2
+  dashboard-host: 192.168.6.23
+  dockerregistry: gcr.io/google_containers
+  hyperkubeversion: v1.7.3
+  etcdversion: 2.2.5
+  apiserverversion: v1.7.3
+  kubeschedulerversion: v1.7.3
+  kubecontrollermanagerversion:  v1.7.3
+  dashboard_version: v1.6.1
+
+
+# the component should be bootstrapped remotely
+component_list:
+
+  apiserver:
+  - src: apiserver.yaml
+    # the full dst path will be " template/generated/&{hostip}/ .... "
+    dst: src/etc/kubernetes/manifests
+
+  controller-manager:
+   - src: controller-manager.yaml
+    dst: src/etc/kubernetes/manifests
+
+  etcd:
+  - src: etcd.yaml
+    dst: src/etc/kubernetes/manifests
+
+  scheduler:
+  - src: scheduler.yaml
+    dst: src/etc/kubernetes/manifests
+
+  kubelet:
+  - src: kubelet.sh
+    dst: src/
+
+  #haproxy:
+  #- src: haproxy.yaml
+  #  dst: src/etc/kubernetes/manifests
+  #- src: haproxy.cfg
+  #  dst: src/haproxy
+
+
+
+remote_deployment:
+  master:
+    listname: mastermachinelist
+    component:
+    - name: apiserver
+    - name: controller-manager
+    - name: etcd
+    - name: scheduler
+    - name: kubelet
+
+
+  worker:
+    listname: workermachinelist
+    component:
+    - name: kubelet
+
+
+mastermachinelist:
+
+  # hostname, must be the same as it in the host network
+  infra-01:
+    # The nodename in k8s. To avoid complication, it is suggested to fill in the hostip for the nodename.
+    # If you are confident that DNS can resolve your named nodename correctly, you can specify a UNIQUE_HOST_NAME.
+    # hostip: the static IP of this node. We assume the IP of a host will not change.
+    # sshport: the ssh port of this node. If not specified, the port is 22.
+    # username/password: the user name and password in the OS. Make sure it is granted with sudo permission.
+    nodename: 192.168.6.23
+    hostip: 192.168.6.23
+    sshport: 22
+    etcdid: etcdid1
+    username: iecas
+    password: 123456
+
+
+
+workermachinelist:
+
+  worker-01:
+    nodename: 192.168.6.22
+    hostip: 192.168.6.22
+    sshport: 22
+    username: iecas
+    password: 123456
+    
+    
+    
+################## the details of apiserver.yaml ###################
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-apiserver
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - image: gcr.io/google_containers/kube-apiserver:v1.7.3
+    name: apiserver-container
+    command:
+    - /usr/local/bin/kube-apiserver
+    - --insecure-bind-address
+    - 192.168.6.23
+    - --storage-backend
+    - etcd2
+    - --allow-privileged=true
+    - --etcd-servers
+    - http://192.168.6.23:4001
+    - --service-cluster-ip-range
+    - 10.254.0.0/16
+    - --storage-media-type
+    - application/json
+    - --anonymous-auth=true
+    - --cors-allowed-origins
+    - .*
+    
+   
+######################### the details of controller-manager.yaml ###################
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-controller-manager
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - image: gcr.io/google_containers/kube-controller-manager:v1.7.3
+    name: kube-controller-manager
+    command:
+    - /usr/local/bin/kube-controller-manager
+    - --master
+    - 192.168.6.23:8080
+    - --service-cluster-ip-range
+    - 10.254.0.0/16
+    - --leader-elect=true
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 10252
+      initialDelaySeconds: 15
+      timeoutSeconds: 1
+      
+      
+################## the details of etcd.yaml #####################
+apiVersion: v1
+kind: Pod
+metadata:
+  name: etcd-server
+spec:
+  hostNetwork: true
+  containers:
+  - image: gcr.io/google_containers/etcd:2.2.5
+    name: etcd-container
+    command:
+    - /usr/local/bin/etcd
+    - --name
+    - etcdid1
+    - --initial-advertise-peer-urls
+    - http://192.168.6.23:2380
+    - --initial-cluster-state
+    - new
+    - --listen-peer-urls
+    - http://0.0.0.0:2380
+    - --advertise-client-urls
+    - http://192.168.6.23:4001
+    - --listen-client-urls
+    - http://0.0.0.0:4001
+    - --initial-cluster
+    - etcdid1=http://192.168.6.23:2380
+    - --data-dir
+    - /var/etcd/data
+    ports:
+    - containerPort: 2380
+      hostPort: 2380
+      name: serverport
+    - containerPort: 4001
+      hostPort: 4001
+      name: clientport
+    volumeMounts:
+    - mountPath: /var/etcd
+      name: varetcd
+  volumes:
+  - hostPath:
+      path: /var/etcd/data
+    name: varetcd
+    
+    
+############## the details of scheduler.yaml################
+    
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-scheduler
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - image: gcr.io/google_containers/kube-scheduler:v1.7.3
+    name: kube-scheduler
+    command:
+    - /usr/local/bin/kube-scheduler
+    - --master
+    - 192.168.6.23:8080
+    - --leader-elect=true
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 10251
+      initialDelaySeconds: 15
+      timeoutSeconds: 1
+      
+      
+############## the details of kubectl config##################
+apiVersion: v1
+clusters:
+- cluster:
+    insecure-skip-tls-verify: true
+    server: http://192.168.6.23:8080
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: admin
+  name: kubernetes
+current-context: kubernetes
+kind: Config
+preferences: {}
+users: []
+ 
