@@ -1,0 +1,125 @@
+
+Name:           node-exporter-nsk5g
+Namespace:      default
+Node:           192.168.6.23/192.168.6.23
+Start Time:     Wed, 14 Mar 2018 10:21:57 +0000
+Labels:         app=node-exporter
+                controller-revision-hash=429488497
+                pod-template-generation=1
+Annotations:    kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"DaemonSet","namespace":"default","name":"node-exporter","uid":"864d2dcc-2771-11e8-8f4b-ac1f6b26d506","apiV...
+Status:         Pending
+IP:             192.168.6.23
+Controlled By:  DaemonSet/node-exporter
+Containers:
+  node-exporter:
+    Container ID:  
+    Image:         prom/node-exporter
+    Image ID:      
+    Port:          9100/TCP
+    Args:
+      --collector.textfile.directory=/datastorage/prometheus
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /datastorage/prometheus from collector-mount (rw)
+      /rootfs from rootfs (ro)
+      /sys from sys (ro)
+      /var/lib/docker from docker (ro)
+      /var/run from var-run (rw)
+  gpu-exporter:
+    Container ID:   docker://f461243a3f7440028850bb6d3b59ca0c114fa474535b570499423093b5501d3b
+    Image:          192.168.6.23:5000/iecas/gpu-exporter:v1.1
+    Image ID:       docker-pullable://192.168.6.23:5000/iecas/gpu-exporter@sha256:2060863f25266bfb65a2dbabc8e9d501f10ee1bf1b382b1e144bf6daf2c21190
+    Port:           <none>
+    State:          Running
+      Started:      Wed, 14 Mar 2018 10:21:58 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /datastorage/prometheus from collector-mount (rw)
+      /dev from device-mount (rw)
+      /var/drivers from driver-path (rw)
+  cadvisor:
+    Container ID:  docker://373e6776780c9f33a49d0c511aa99a31831fdb96a1ce4c0cc36cd4adce6f4948
+    Image:         google/cadvisor:v0.29.0
+    Image ID:      docker://sha256:4623226ef052e4cc20358b2880e6d35c6d90671aa27a013bf629c69a3e57db51
+    Port:          8089/TCP
+    Args:
+      --port=8089
+    State:          Running
+      Started:      Wed, 14 Mar 2018 10:21:59 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      LD_LIBRARY_PATH:  /var/drivers/nvidia/current/lib:/var/drivers/nvidia/current/lib64
+    Mounts:
+      /dev from device-mount (rw)
+      /rootfs from rootfs (ro)
+      /sys from sys (ro)
+      /var/drivers from driver-path (rw)
+      /var/lib/docker from docker (ro)
+      /var/run from var-run (rw)
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          False 
+  PodScheduled   True 
+Volumes:
+  device-mount:
+    Type:          HostPath (bare host directory volume)
+    Path:          /dev
+    HostPathType:  
+  driver-path:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/drivers
+    HostPathType:  
+  collector-mount:
+    Type:          HostPath (bare host directory volume)
+    Path:          /datastorage/prometheus
+    HostPathType:  
+  rootfs:
+    Type:          HostPath (bare host directory volume)
+    Path:          /
+    HostPathType:  
+  var-run:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/run
+    HostPathType:  
+  sys:
+    Type:          HostPath (bare host directory volume)
+    Path:          /sys
+    HostPathType:  
+  docker:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/docker
+    HostPathType:  
+QoS Class:         BestEffort
+Node-Selectors:    node-exporter=true
+Tolerations:       node.alpha.kubernetes.io/notReady:NoExecute
+                   node.alpha.kubernetes.io/unreachable:NoExecute
+Events:
+  Type     Reason                 Age                From                   Message
+  ----     ------                 ----               ----                   -------
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "sys"
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "device-mount"
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "driver-path"
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "rootfs"
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "var-run"
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "collector-mount"
+  Normal   SuccessfulMountVolume  36s                kubelet, 192.168.6.23  MountVolume.SetUp succeeded for volume "docker"
+  Normal   Created                35s                kubelet, 192.168.6.23  Created container
+  Normal   Pulled                 35s                kubelet, 192.168.6.23  Container image "192.168.6.23:5000/iecas/gpu-exporter:v1.1" already present on machine
+  Normal   Created                35s                kubelet, 192.168.6.23  Created container
+  Normal   Pulled                 35s                kubelet, 192.168.6.23  Container image "google/cadvisor:v0.29.0" already present on machine
+  Normal   Started                35s                kubelet, 192.168.6.23  Started container
+  Normal   Started                34s                kubelet, 192.168.6.23  Started container
+  Warning  Failed                 34s                kubelet, 192.168.6.23  Failed to pull image "prom/node-exporter": rpc error: code = 2 desc = Error response from daemon: {"message":"Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on [::1]:53: read udp [::1]:51336->[::1]:53: read: connection refused"}
+  Normal   Pulling                19s (x2 over 34s)  kubelet, 192.168.6.23  pulling image "prom/node-exporter"
+  Warning  Failed                 19s                kubelet, 192.168.6.23  Failed to pull image "prom/node-exporter": rpc error: code = 2 desc = Error response from daemon: {"message":"Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on [::1]:53: read udp [::1]:53649->[::1]:53: read: connection refused"}
+  Warning  FailedSync             4s (x5 over 34s)   kubelet, 192.168.6.23  Error syncing pod
+  Normal   BackOff                4s (x3 over 32s)   kubelet, 192.168.6.23  Back-off pulling image "prom/node-exporter"
+
