@@ -1,0 +1,58 @@
+Login Succeeded
+docker registry login successfully
+configmap "host-configuration" created
+configmap "docker-credentials" created
+configmap "gpu-configuration" created
+secret "iecas" created
+node "192.168.6.23" labeled
+node "192.168.6.22" labeled
+daemonset "drivers-one-shot" created
+drivers-one-shot is not ready yet. Pleas wait for a moment!
+drivers-one-shot is ready!
+node "192.168.6.23" labeled
+node "192.168.6.23" labeled
+node "192.168.6.23" labeled
+node "192.168.6.23" labeled
+node "192.168.6.22" labeled
+node "192.168.6.22" labeled
+configmap "hadoop-configuration" created
+daemonset "zookeeper-ds" created
+zookeeper is not ready yet. Pleas wait for a moment!
+zookeeper is ready!
+daemonset "hadoop-name-node-ds" created
+hadoop-name-node is not ready yet. Pleas wait for a moment!
+hadoop-name-node is ready!
+daemonset "hadoop-data-node-ds" created
+hadoop-data-node is not ready yet. Pleas wait for a moment!
+hadoop-data-node is ready!
+daemonset "hadoop-resource-manager-ds" created
+hadoop-resource-manager is not ready yet. Pleas wait for a moment!
+hadoop-resource-manager is ready!
+daemonset "hadoop-node-manager-ds" created
+hadoop-node-manager is not ready yet. Pleas wait for a moment!
+hadoop-node-manager is ready!
+daemonset "hadoop-jobhistory-service" created
+hadoop-jobhistory-service is not ready yet. Pleas wait for a moment!
+hadoop-jobhistory-service is ready!
+node "192.168.6.23" labeled
+configmap "frameworklauncher-configmap" created
+daemonset "frameworklauncher-ds" created
+node "192.168.6.23" labeled
+
+Error from server (BadRequest): error when creating "rest-server.yaml": DaemonSet in version "v1beta1" cannot be handled as a DaemonSet: [pos 587]: json: expect char '"' but got char '1'
+
+node "192.168.6.23" labeled
+daemonset "webportal-ds" created
+
+error: 'prometheus' already has a value (true), and --overwrite is false
+
+node "192.168.6.23" labeled
+node "192.168.6.22" labeled
+configmap "prometheus-configmap" created
+daemonset "node-exporter" created
+deployment "prometheus-deployment" created
+configmap "grafana-configuration" created
+node "192.168.6.23" labeled
+deployment "grafana" created
+node "192.168.6.23" labeled
+daemonset "pylon-ds" created
