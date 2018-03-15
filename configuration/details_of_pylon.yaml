@@ -1,0 +1,45 @@
+Name:           pylon-ds-c30xt
+Namespace:      default
+Node:           192.168.6.23/192.168.6.23
+Start Time:     Thu, 15 Mar 2018 01:30:11 +0000
+Labels:         app=pylon
+                controller-revision-hash=1323436003
+                pod-template-generation=1
+Annotations:    kubernetes.io/created-by={"kind":"SerializedReference","apiVersion":"v1","reference":{"kind":"DaemonSet","namespace":"defaul
+Status:         Pending
+IP:             
+Controlled By:  DaemonSet/pylon-ds
+Containers:
+  pylon:
+    Container ID:   
+    Image:          192.168.6.23:5000/iecas/pylon:v1.1
+    Image ID:       
+    Port:           80/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:
+      REST_SERVER_URI:     http://192.168.6.23:9186
+      K8S_API_SERVER_URI:  http://192.168.6.23:8080
+      WEBHDFS_URI:         http://192.168.6.23:50070
+      PROMETHEUS_URI:      http://192.168.6.23:9091
+      K8S_DASHBOARD_URI:   http://192.168.6.23:9090
+      GRAFANA_URI:         http://192.168.6.23:3000
+      WEBPORTAL_URI:       http://192.168.6.23:9286
+    Mounts:                <none>
+Conditions:
+  Type           Status
+  Initialized    True 
+  Ready          False 
+  PodScheduled   True 
+Volumes:         <none>
+QoS Class:       BestEffort
+Node-Selectors:  pylon=true
+Tolerations:     node.alpha.kubernetes.io/notReady:NoExecute
+                 node.alpha.kubernetes.io/unreachable:NoExecute
+Events:
+  Type     Reason          Age               From                   Message
+  ----     ------          ----              ----                   -------
+  Warning  FailedSync      0s (x90 over 1m)  kubelet, 192.168.6.23  Error syncing pod
+  Normal   SandboxChanged  0s (x89 over 1m)  kubelet, 192.168.6.23  Pod sandbox changed, it will be killed and re-created.
