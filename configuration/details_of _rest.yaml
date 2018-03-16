@@ -1,0 +1,49 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: rest-server-ds
+spec:
+  template:
+    metadata:
+      name: rest-server
+      labels:
+        app: rest-server
+    spec:
+      hostNetwork: false
+      hostPID: false
+      nodeSelector:
+        restserver: "true"
+      containers:
+      - name: rest-server
+        image: 192.168.6.23:5000/iecas/rest-server:v1.1
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /var/pai
+          name: pai-path
+        env:
+        - name: LAUNCHER_WEBSERVICE_URI
+          value: http://192.168.6.23:9086
+        - name: HDFS_URI
+          value: hdfs://192.168.6.23:9000
+        - name: WEBHDFS_URI
+          value: http://192.168.6.23:50070
+        - name: JWT_SECRET
+          value: iecas
+        - name: LOWDB_FILE
+          value: /var/pai/rest-server/user.db.json
+        - name: LOWDB_ADMIN
+          value: iecas
+        - name: LOWDB_PASSWD
+          value: 123456
+        ports:
+        - name: rest-server
+          containerPort: 8080
+          hostPort: 9186
+      imagePullSecrets:
+      - name: iecas
+      volumes:
+      - name: pai-path
+        hostPath:
+          path: /var/pai
