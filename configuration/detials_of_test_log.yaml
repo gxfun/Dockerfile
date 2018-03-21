@@ -1,0 +1,104 @@
+> pai-rest-server@0.1.0 start /usr/src/app
+> node index.js
+
+2018-03-19T18:46:38.723Z [INFO] config: {"env":"production","logLevel":"debug","serverPort":8080,"jwtSecret":"iecas","lowdbFile":"/var/pai/rest-server/user.db.json","lowdbAdmin":"iecas","lowdbPasswd":"123456"} 
+2018-03-19T18:46:38.727Z [INFO] launcher config: {"hdfsUri":"hdfs://192.168.30.215:9000","webhdfsUri":"http://192.168.30.215:50070","webserviceUri":"http://192.168.30.215:9086","webserviceRequestHeaders":{"Accept":"application/json","Content-Type":"application/json"},"jobRootDir":"./frameworklauncher","jobDirCleanUpIntervalSecond":7200,"jobConfigFileName":"JobConfig.json","frameworkDescriptionFilename":"FrameworkDescription.json"} 
+2018-03-19T18:46:38.732Z [INFO] RESTful API server starts on port 8080 
+2018-03-19T18:46:38.804Z [INFO] connected to framework launcher successfully 
+2018-03-19T11:07:35.850Z [INFO] GET /api/v1/jobs 200 70.057 ms - 2 
+2018-03-20T03:51:15.683Z [INFO] GET /api/v1/jobs 304 18.667 ms - - 
+2018-03-21T03:13:01.683Z [INFO] GET /api/v1/jobs 200 9.895 ms - 2 
+2018-03-21T03:13:41.097Z [INFO] GET /api/v1/jobs 304 9.471 ms - - 
+2018-03-21T03:13:43.249Z [INFO] GET /api/v1/jobs 304 7.923 ms - - 
+2018-03-21T03:16:56.373Z [WARN] Error: API not found
+    at app.use (/usr/src/app/src/config/express.js:47:15)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/usr/src/app/node_modules/express/lib/router/index.js:335:12)
+    at next (/usr/src/app/node_modules/express/lib/router/index.js:275:10)
+    at logger (/usr/src/app/node_modules/morgan/index.js:144:5)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7 
+2018-03-21T03:16:56.378Z [INFO] GET / 404 4.353 ms - 38 
+2018-03-21T03:16:56.411Z [WARN] Error: API not found
+    at app.use (/usr/src/app/src/config/express.js:47:15)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/usr/src/app/node_modules/express/lib/router/index.js:335:12)
+    at next (/usr/src/app/node_modules/express/lib/router/index.js:275:10)
+    at logger (/usr/src/app/node_modules/morgan/index.js:144:5)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7 
+2018-03-21T03:16:56.413Z [INFO] GET /favicon.ico 404 1.843 ms - 38 
+2018-03-21T03:17:36.844Z [INFO] GET /api/v1/jobs 200 7.139 ms - 2 
+2018-03-21T03:25:10.797Z [INFO] GET /api/v1/jobs 200 8.825 ms - 2 
+2018-03-21T03:25:12.354Z [INFO] GET /api/v1/jobs 304 8.925 ms - - 
+2018-03-21T03:53:54.931Z [INFO] GET /api/v1/jobs 304 10.469 ms - - 
+2018-03-21T03:54:06.147Z [INFO] GET /api/v1/jobs 304 7.518 ms - - 
+2018-03-21T03:57:03.382Z [INFO] GET /api/v1/jobs 200 4.485 ms - 2 
+2018-03-21T03:57:08.754Z [INFO] GET /api/v1/jobs 304 5.592 ms - - 
+2018-03-21T04:04:01.449Z [INFO] GET /api/v1/jobs 304 5.169 ms - - 
+2018-03-21T04:21:14.235Z [INFO] GET /api/v1/jobs 304 9.052 ms - - 
+2018-03-21T04:21:17.357Z [INFO] GET /api/v1/jobs 304 7.969 ms - - 
+2018-03-21T04:21:25.934Z [INFO] GET /api/v1/jobs 304 8.671 ms - - 
+2018-03-21T04:21:27.436Z [INFO] GET /api/v1/jobs 304 7.481 ms - - 
+2018-03-21T04:21:28.115Z [INFO] GET /api/v1/jobs 304 8.179 ms - - 
+2018-03-21T04:21:28.819Z [INFO] GET /api/v1/jobs 304 9.582 ms - - 
+2018-03-21T04:24:08.211Z [INFO] GET /api/v1/jobs 304 7.709 ms - - 
+2018-03-21T04:24:09.094Z [INFO] GET /api/v1/jobs 304 9.904 ms - - 
+2018-03-21T04:24:09.676Z [INFO] GET /api/v1/jobs 304 4.070 ms - - 
+2018-03-21T04:24:10.043Z [INFO] GET /api/v1/jobs 304 6.858 ms - - 
+2018-03-21T04:24:10.802Z [INFO] GET /api/v1/jobs 304 12.638 ms - - 
+2018-03-21T04:24:14.726Z [INFO] GET /api/v1/jobs 304 10.913 ms - - 
+2018-03-21T04:25:00.870Z [INFO] POST /api/v1/token 200 40.991 ms - 211 
+2018-03-21T04:25:01.062Z [INFO] GET /api/v1/jobs 304 8.889 ms - - 
+2018-03-21T04:25:21.903Z [WARN] internal server error 
+2018-03-21T04:25:21.905Z [INFO] PUT /api/v1/jobs/tensorflow-distributed-jobguid 500 66.112 ms - 65 
+2018-03-21T04:26:51.872Z [INFO] GET /api/v1/jobs 304 8.578 ms - - 
+2018-03-21T04:26:53.049Z [INFO] GET /api/v1/jobs 304 8.230 ms - - 
+2018-03-21T04:26:58.451Z [WARN] internal server error 
+2018-03-21T04:26:58.452Z [INFO] PUT /api/v1/jobs/tensorflow-distributed-jobguid 500 12.620 ms - 65 
+2018-03-21T04:27:08.801Z [WARN] Error: API not found
+    at app.use (/usr/src/app/src/config/express.js:47:15)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/usr/src/app/node_modules/express/lib/router/index.js:335:12)
+    at next (/usr/src/app/node_modules/express/lib/router/index.js:275:10)
+    at logger (/usr/src/app/node_modules/morgan/index.js:144:5)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7 
+2018-03-21T04:27:08.803Z [INFO] GET / 404 1.786 ms - 38 
+2018-03-21T04:27:08.836Z [WARN] Error: API not found
+    at app.use (/usr/src/app/src/config/express.js:47:15)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/usr/src/app/node_modules/express/lib/router/index.js:335:12)
+    at next (/usr/src/app/node_modules/express/lib/router/index.js:275:10)
+    at logger (/usr/src/app/node_modules/morgan/index.js:144:5)
+    at Layer.handle [as handle_request] (/usr/src/app/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/usr/src/app/node_modules/express/lib/router/index.js:317:13)
+    at /usr/src/app/node_modules/express/lib/router/index.js:284:7 
+2018-03-21T04:27:08.838Z [INFO] GET /favicon.ico 404 1.859 ms - 38 
+2018-03-21T04:27:44.127Z [WARN] update user iecas failed 
+2018-03-21T04:27:44.131Z [INFO] PUT /api/v1/user 500 13.526 ms - 50 
+2018-03-21T04:27:58.066Z [INFO] PUT /api/v1/user 201 38.051 ms - 33 
+2018-03-21T04:28:13.648Z [INFO] POST /api/v1/token 200 31.971 ms - 204 
+2018-03-21T04:28:14.221Z [INFO] GET /api/v1/jobs 200 8.237 ms - 2 
+2018-03-21T04:28:18.724Z [INFO] GET /api/v1/jobs 304 9.354 ms - - 
+2018-03-21T04:28:24.324Z [WARN] internal server error 
+2018-03-21T04:28:24.325Z [INFO] PUT /api/v1/jobs/tensorflow-distributed-jobguid 500 11.804 ms - 65 
+2018-03-21T04:30:32.567Z [INFO] POST /api/v1/token 200 17.638 ms - 204 
+2018-03-21T04:30:32.802Z [INFO] GET /api/v1/jobs 304 3.999 ms - - 
+2018-03-21T04:30:52.845Z [WARN] internal server error 
+2018-03-21T04:30:52.847Z [INFO] PUT /api/v1/jobs/tensorflow-distributed-jobguid 500 8.557 ms - 65 
+2018-03-21T04:31:10.959Z [INFO] GET /api/v1/jobs 304 7.850 ms - - 
+2018-03-21T04:33:45.491Z [WARN] internal server error 
+2018-03-21T04:33:45.492Z [INFO] PUT /api/v1/jobs/tensorflow-distributed-jobguid 500 10.088 ms - 65 
+2018-03-21T06:16:48.534Z [INFO] GET /api/v1/jobs 304 6.622 ms - - 
