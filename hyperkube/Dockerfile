@@ -1,2 +1,2 @@
-FROM gcr.io/google_containers/hyperkube:v1.7.3 
+FROM gcr.io/google_containers/hyperkube:v1.9.0
 MAINTAINER gao_x2015@163.com
